@@ -1,0 +1,47 @@
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ElectionAppMAUI.Views.UpdateCandidatePage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Label Text="Редагування кандидата"
+                   FontSize="24"
+                   FontAttributes="Bold"/>
+
+            <!-- Name -->
+            <Entry 
+                Placeholder="ПІБ"
+                Text="{Binding Candidate.Name}" />
+
+            <!-- Party -->
+            <Entry 
+                Placeholder="Партія"
+                Text="{Binding Candidate.Party}" />
+
+            <!-- Birthdate -->
+            <DatePicker 
+                Date="{Binding Candidate.Birthdate}"
+                Format="yyyy-MM-dd" />
+
+            <!-- Description -->
+            <Entry 
+                Placeholder="Біографія"
+                Text="{Binding Candidate.Description}" />
+
+            <!-- Photo URL -->
+            <Entry 
+                Placeholder="Фото URL"
+                Text="{Binding Candidate.PhotoUrl}" />
+
+            <Button 
+                Text="Оновити"
+                BackgroundColor="#007bff"
+                TextColor="White"
+                Command="{Binding SaveCommand}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

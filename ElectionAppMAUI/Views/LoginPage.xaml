@@ -1,0 +1,48 @@
+<ContentPage
+    x:Class="ElectionAppMAUI.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:ElectionAppMAUI.ViewModels">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="20" Spacing="16">
+
+        <Label Text="Виберіть банк" FontSize="18" />
+
+        <Picker
+            ItemsSource="{Binding Banks}"
+            SelectedItem="{Binding SelectedBank}" />
+
+        <Entry
+            Placeholder="Пароль"
+            IsPassword="True"
+            Text="{Binding Password}" />
+
+        <Button
+            Text="Вибрати JSON файл"
+            Clicked="OnPickFile" />
+
+        <Label
+            Text="{Binding FileName}"
+            TextColor="Gray"
+            FontSize="13" />
+
+        <Button
+            Text="Увійти"
+            Command="{Binding LoginCommand}" />
+
+        <ActivityIndicator
+            IsRunning="{Binding Loading}"
+            IsVisible="{Binding Loading}"
+            Color="Blue" />
+
+        <Label
+            Text="{Binding Error}"
+            TextColor="Red" />
+
+    </VerticalStackLayout>
+
+</ContentPage>

@@ -1,0 +1,35 @@
+﻿@model List<ElectionApp.Models.Candidate>
+@{
+	ViewData["Title"] = "Voting";
+}
+<h1>Candidates</h1>
+<form asp-action="Submit" asp-controller="Voting" method="post">
+<table>
+	<thead>
+		<tr>
+			<th>Photo</th>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Party</th>
+			<th>Deputy</th>
+			<th>Choose</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var c in Model)
+		{
+			<tr>
+				<th></th>
+				<th>@c.Id</th>
+				<th>@c.Name</th>
+				<th>@c.Party</th>
+				<th>@c.Deputy</th>
+				<th>
+					<input type="radio" name="selectedCandidateId" value="@c.Id" />
+				</th>
+			</tr>
+		}
+	</tbody>
+</table>
+<button type="submit" class="btn btn-primary">Vote</button>
+</form>

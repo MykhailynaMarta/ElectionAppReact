@@ -1,0 +1,66 @@
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:ElectionAppMAUI.ViewModels"
+    x:Class="ElectionAppMAUI.Pages.CandidateDetailsPage">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <!-- Loader -->
+                <ActivityIndicator 
+                    IsRunning="{Binding IsLoading}" 
+                    IsVisible="{Binding IsLoading}"
+                    Color="#2196F3"/>
+
+                <!-- MAIN -->
+                <StackLayout IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}">
+
+                    <!-- Photo -->
+                    <Image 
+                        HeightRequest="280"
+                        Aspect="AspectFill"
+                        Source="{Binding PhotoUrl, Converter={StaticResource Base64ToImageConverter}}" />
+
+                    <!-- Name -->
+                    <Label 
+                        Text="{Binding Candidate.Name}" 
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"/>
+
+                    <Label 
+                        Text="{Binding Candidate.Party}" 
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        TextColor="Gray"/>
+
+                    <Label FontSize="16">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Дата народження: " FontAttributes="Bold"/>
+                                <Span Text="{Binding Candidate.Birthdate, StringFormat='{0:yyyy-MM-dd}'}" />
+
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <!-- Biography -->
+                    <Label 
+                        Text="Біографія"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        Margin="0,20,0,0"/>
+
+                    <Label 
+                        Text="{Binding Candidate.Description}"
+                        FontSize="16"
+                        LineBreakMode="WordWrap"/>
+
+                </StackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

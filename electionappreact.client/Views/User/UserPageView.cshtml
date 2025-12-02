@@ -1,0 +1,12 @@
+﻿@model ElectionApp.Models.User
+@{
+	ViewData["Title"] = "User Info";
+}
+
+<aside>
+	<h3>@Model.Name @Model.Surname</h3>
+	<ul>
+		<li><a href="@Url.Action("UserPageView", "User", new { id = @Model.Id })">User info</a></li>
+		<li><a href="@Url.Action("VotingView", "Voting")">Vote</a></li>
+	</ul>
+</aside>

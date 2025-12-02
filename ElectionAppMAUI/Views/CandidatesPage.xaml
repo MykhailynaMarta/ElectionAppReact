@@ -1,0 +1,102 @@
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:ElectionAppMAUI.ViewModels"
+    x:Class="ElectionAppMAUI.Views.CandidatesPage"
+    x:Name="candidatesPage">
+
+    <ContentPage.BindingContext>
+        <vm:CandidatesViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Entry 
+                Placeholder="Пошук по імені або партії..."
+                Text="{Binding Search}" />
+
+            <Button 
+                Text="Додати кандидата"
+                IsVisible="{Binding IsAdmin}"
+                Clicked="OnAddCandidate" />
+
+            <CollectionView ItemsSource="{Binding Filtered}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame Padding="10" Margin="0,10" HasShadow="True">
+
+                            <Grid ColumnDefinitions="120,*"
+                                  RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+
+                                <!-- Фото -->
+                                <Image 
+                                    Grid.RowSpan="5"
+                                    Source="{Binding PhotoUrl, Converter={StaticResource Base64ToImageConverter}}"
+                                    HeightRequest="160"
+                                    WidthRequest="120"
+                                    Aspect="AspectFill" />
+
+                                <!-- Ім'я -->
+                                <Label 
+                                    Grid.Column="1"
+                                    Text="{Binding Name}"
+                                    FontAttributes="Bold"
+                                    FontSize="20"/>
+
+                                <!-- Партія -->
+                                <Label 
+                                    Grid.Column="1"
+                                    Grid.Row="1"
+                                    Text="{Binding Party}"
+                                    TextColor="Gray"/>
+
+                                <!-- Детальніше -->
+                                <Button 
+                                    Grid.Column="1"
+                                    Grid.Row="2"
+                                    Text="Детальніше →"
+                                    CommandParameter="{Binding Id}"
+                                    Clicked="OnOpenDetails" />
+
+                                <!-- Голосувати -->
+                                <Button 
+                                    Grid.Column="1"
+                                    Grid.Row="3"
+                                    Text="Голосувати"
+                                    BackgroundColor="#2563EB"
+                                    TextColor="White"
+                                    Command="{Binding BindingContext.VoteCommand, Source={x:Reference candidatesPage}}"
+                                    CommandParameter="{Binding Id}" />
+
+                                <!-- Адмін кнопки -->
+                                <HorizontalStackLayout 
+                                    Grid.Column="1"
+                                    Grid.Row="4"
+                                    Spacing="10"
+                                    IsVisible="{Binding BindingContext.IsAdmin, Source={x:Reference candidatesPage}}">
+
+                                    <Button 
+                                        Text="Редагувати"
+                                        CommandParameter="{Binding Id}"
+                                        Clicked="OnEditCandidate" />
+
+                                    <Button 
+                                        Text="Видалити"
+                                        BackgroundColor="Red"
+                                        TextColor="White"
+                                        CommandParameter="{Binding Id}"
+                                        Clicked="OnDeleteCandidate" />
+
+                                </HorizontalStackLayout>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

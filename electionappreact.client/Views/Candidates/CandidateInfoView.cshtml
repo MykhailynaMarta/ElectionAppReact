@@ -1,0 +1,11 @@
+﻿@model ElectionApp.Models.Candidate
+
+@{
+    ViewData["Title"] = Model?.Name ?? "Candidate not found";
+}
+
+<div>
+    <p>@Model.Name — @Model.Party</p>
+    <p>@Model.Description</p>
+    <p>Deputy: @Model.Deputy</p>
+</div>

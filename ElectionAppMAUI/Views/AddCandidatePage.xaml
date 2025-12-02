@@ -1,0 +1,46 @@
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:ElectionAppMAUI.ViewModels"
+    x:Class="ElectionAppMAUI.Views.AddCandidatePage">
+
+    <ContentPage.BindingContext>
+        <vm:AddCandidateViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Label Text="Додати кандидата"
+                   FontSize="24"
+                   FontAttributes="Bold"/>
+
+            <!-- Name -->
+            <Entry Placeholder="ПІБ"
+                   Text="{Binding Candidate.Name}" />
+
+            <!-- Party -->
+            <Entry Placeholder="Партія"
+                   Text="{Binding Candidate.Party}" />
+
+            <!-- Description -->
+            <Entry Placeholder="Коротка біографія"
+                   Text="{Binding Candidate.Description}" />
+
+            <!-- Birthdate -->
+            <DatePicker Date="{Binding Candidate.Birthdate}"
+                        Format="yyyy-MM-dd" />
+
+            <!-- Photo -->
+            <Button Text="Вибрати фото"
+                    Command="{Binding PickFileCommand}" />
+
+            <!-- Submit -->
+            <Button Text="Додати кандидата"
+                    Command="{Binding SubmitCommand}"
+                    BackgroundColor="#059669"
+                    TextColor="White" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
